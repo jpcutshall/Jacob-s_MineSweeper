@@ -5,5 +5,17 @@ body {
 	background-color: blanchedalmond;
 }
 h1 {
-	right: 25%;
+	border: 1px solid grey;
+	border-radius: 10%;
+	background-color: cornsilk;
+}
+.gaame-box {
+	border: 1px solid black;
+	margin: 6px;
+}
+.tile {
+	background-color: solid white;
+	height: 10px;
+	width: 10px;
+	border: 1px solid black
 }
