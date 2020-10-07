@@ -71,6 +71,7 @@ button {
 	flex-wrap: wrap;
 }
 .game-box div div{
+	cursor: pointer;
 	background-color: lightgrey;
 	border: 1px solid grey;
 	height: 20px;

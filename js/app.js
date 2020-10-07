@@ -17,12 +17,14 @@ const App = {
 
 		let j = 0
 		let h = 0
+		let exy = 0
+		let exy2 = 0 // trying to get solid X attribute
 		for (let i = 0; i < App.cols*App.rows; i++) {
 
 			const $playOne = $('.player1Box')
   		const $playTwo = $('.player2Box')	// EDIT
   		const tile = $('<div>').attr({			//sets up game for player one
-  			x: i,
+  			x: exy,
 				y: j,
   			class: shuffledArray[i]
   		}).appendTo($playOne)
@@ -30,9 +32,10 @@ const App = {
 			j++
 			if (j > 19) {
 				j = 0
+				exy++
 			}
 			const tile2 = $('<div>').attr({		// sets up game for player two
-  			x: i,
+  			x: exy2,
 				y: h,
   			class: shuffledArray[i]
   		}).appendTo($playTwo)
@@ -40,6 +43,15 @@ const App = {
 			h++
 			if (h > 19) {
 				h = 0
+				exy2++
+			}
+
+		}
+
+		for (let i = 0; i < grid.length; i++) {
+
+			if (grid[i].hasClass('clear')) {
+
 			}
 
 		}
