@@ -78,6 +78,6 @@ button {
 	display: flex;
 	flex-flow: row;
 }
-.bomb {
+.game-box div .bomb {
 	background-color: tomato;
 }

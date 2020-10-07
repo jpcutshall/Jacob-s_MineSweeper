@@ -6,17 +6,14 @@ console.log("all is connected")
 //
 let grid = []
 const App = {
-	cols: 20,
+	cols: 20,  // using cols and rows because i wanted to make it easy to edit but lets see how it plays out.
 	rows: 20,
-	difficulty: 6,
+	difficulty: 33, // number of mines. want to implement this another way like percentage of the number of divs
 	createNewGrid: () => {
-		const bombArray = Array(App.difficulty).fill('bomb')
-		console.log(bombArray)  //fill array with bombs
+		const bombArray = Array(App.difficulty).fill('bomb')  //fill array with bombs
 		const emptyArray = Array(App.cols*App.rows - App.difficulty).fill('clear')
-		console.log(emptyArray)
 		const gameArray = emptyArray.concat(bombArray)
-		console.log(gameArray)
-		const shuffledArray = gameArray.sort(() => Math.random() - 0.5) // randomizes position of bombs in the shuffles array
+		const shuffledArray = gameArray.sort(() => Math.random() - 0.5) // randomizes position of bombs in the shuffled array
 
 		let j = 0
 		let h = 0
@@ -24,7 +21,7 @@ const App = {
 
 			const $playOne = $('.player1Box')
   		const $playTwo = $('.player2Box')	// EDIT
-  		const tile = $('<div>').attr({
+  		const tile = $('<div>').attr({			//sets up game for player one
   			x: i,
 				y: j,
   			class: shuffledArray[i]
@@ -34,7 +31,7 @@ const App = {
 			if (j > 19) {
 				j = 0
 			}
-			const tile2 = $('<div>').attr({
+			const tile2 = $('<div>').attr({		// sets up game for player two
   			x: i,
 				y: h,
   			class: shuffledArray[i]
@@ -61,28 +58,28 @@ const eventListeners = {
 
 	},
 	easy: () => {
-		App.difficulty = 10;
+		App.difficulty = 33;
 	},
 	hard: () => {
-		App.difficulty = 25;
+		App.difficulty = 66;
 	},
 	extreme: () => {
-		App.difficulty = 45;
+		App.difficulty = 132;
 	},
-	small: () => {
-		App.rows = 8;
-		App.cols = 8;
-	},
-	medium: () => {
-		App.rows = 12;
-		App.cols = 12;
-	},
-	large: () => {
-		App.rows = 16;
-		App.cols = 16;
-	},
+	// small: () => {
+	// 	App.rows = 8;
+	// 	App.cols = 8;
+	// },
+	// medium: () => {
+	// 	App.rows = 12;
+	// 	App.cols = 12;
+	// },
+	// large: () => {
+	// 	App.rows = 16;
+	// 	App.cols = 16;
+	// },
 	start: () => {
-
+		App.createNewGrid()
 	},
 	stop: () => {
 
