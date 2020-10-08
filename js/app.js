@@ -23,8 +23,8 @@ const eventListeners = {
 		App.difficulty = 132;
 	},
 	click: (tile) => {
-		//if (gameOver) return
-		if (tile.hasClass('checked')) return
+		if (App.gameOver) return
+		if (tile.hasClass('checked') || tile.hasClass('flag')) return
 		if (tile.hasClass('bomb')) {  // end game for player
 			alert(`you hit a mine!`)
 		} else {
@@ -50,7 +50,8 @@ let grids2 = []
 const App = {
 	cols: 20,  // using cols and rows because i wanted to make it easy to edit but lets see how it plays out.
 	rows: 20,
-	difficulty: 33, // number of mines. want to implement this another way like percentage of the number of divs
+	difficulty: 33,// number of mines. want to implement this another way like percentage of the number of divs
+	gameOver: false,
 	createNewGrid: (playBox, grid) => {
 		const bombArray = Array(App.difficulty).fill('bomb')  //fill array with bombs
 		const emptyArray = Array(App.cols*App.rows - App.difficulty).fill('clear')
