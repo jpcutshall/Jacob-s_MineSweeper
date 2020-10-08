@@ -42,40 +42,54 @@ const App = {
 
 		for (let i = 0; i < grid.length; i++) {
 
-			let $topLeftEdge = $('div[y="0"][x="0"]')
-			let $topRightEdge = $('div[y="19"][x="0"]')
-			let $bottomLeftEdge = $('div[y="0"][x="19"]')
-			let $topEdge = $('div[x="0"]')
-			let $bottomEdge = $('div[x="19"]')
+			const $topLeftEdge = $('div[y="0"][x="0"]')
+			const $topRightEdge = $('div[y="19"][x="0"]')
+			const $bottomLeftEdge = $('div[y="0"][x="19"]')
+			const $topEdge = $('div[x="0"]')
+			const $bottomEdge = $('div[x="19"]')
+			const $rightEdge = $('div[y="0"]')
+			const $lightEdge = $('div[y="19"]')
+			const gridX = parseInt(grid[i].attr("x"))
+			const gridY = parseInt(grid[i].attr("y"))
+			const below = gridX + 1
+			const above = gridX - 1
+			const left = gridY - 1
+			const right = gridY + 1
 			let counter = 0
+			console.log($('div[x=below]'))
 			if (grid[i].hasClass('clear')) {
 
+				if(grid[i].is($topLeftEdge) && $('div[x="0"][y="1"]').hasClass("bomb")) {
+					counter++
 
-				if($topLeftEdge.is(grid[i]) && $('div[x^=0][y^=1]').hasClass("bomb")) {
-					counter++
-				} else
-				if($topLeftEdge.is(grid[i]) && $('div[x^=1][y^=1]').hasClass("bomb")) {
-					counter++
-				} else
-				if($topLeftEdge.is(grid[i]) && $('div[x^=1][y^=0]').hasClass("bomb")) {
+				}
+				if(grid[i].is($topLeftEdge) && $('div[x="1"][y="1"]').hasClass("bomb")) {
 					counter++
 				}
-				console.log($(grid[i]) === $topLeftEdge)
-				// if($topRightEdge &&)
-					// if ($('div[x="0"][y="1"]').hasClass('bomb')) {
-					// 	counter++
-					// } else if ($('div[x="1"][y="1"]').hasClass('bomb')) {
-					// 	counter++
-					// } else if ($('div[x="1"][y="0"]').hasClass('bomb')) {
-					// 	counter++
-					// }
+				if(grid[i].is($topLeftEdge) && $('div[x="1"][y="0"]').hasClass("bomb")) {
+					counter++
+				}
+				if (grid[i].is($topRightEdge) && $('div[x="0"][y="18"]').hasClass('bomb')) {
+					counter++
+				}
+				if (grid[i].is($topRightEdge) && $('div[x="1"][y="18"]').hasClass('bomb')) {
+					counter++
+				}
+				if (grid[i].is($topRightEdge) && $('div[x="0"][y="19"]').hasClass('bomb')) {
+					counter++
+				}
+				if (grid[i].is($topEdge) && (!grid[i].is($topLeftEdge) || !grid[i].is($topRightEdge)) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) {
+					counter++
+				}
 
-				// if ($topRightEdge) {
-				// 	if ($('div[x="0"][y="18"]').hasClass('bomb')) {
+				// if($topRightEdge.is(grid[i])){
+				// 	if ($('div[x="0"][y="18"]').hasClass('bomb')) {     // testing if different function style works
 				// 		counter++
-				// 	} else if ($('div[x="1"][y="18"]').hasClass('bomb')) {
+				// 	}
+				// 	if ($('div[x="1"][y="18"]').hasClass('bomb')) {
 				// 		counter++
-				// 	} else if ($('div[x="1"][y="19"]').hasClass('bomb')) {
+				// 	}
+				// 	if ($('div[x="1"][y="18"]').hasClass('bomb')) {
 				// 		counter++
 				// 	}
 				//
@@ -132,8 +146,8 @@ $(() => {
 	const $playTwo = $('.player2Box')
 	App.createNewGrid($playOne, grids1)
 	App.createNewGrid($playTwo, grids2)
-	console.log($('.player1Box'))
-	console.log($($playOne))
+	console.log($(grids1[8]))
+
 
 })
 // $(() => {
