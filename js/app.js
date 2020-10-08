@@ -4,52 +4,40 @@ console.log("all is connected")
 //###################################################
 // 1st creating class for the individual squares on the grid
 //
-let grid = []
-let grid2 = []
+const $playOne = $('.player1Box')
+const $playTwo = $('.player2Box')
+let grids1 = []
+let grids2 = []
 const App = {
 	cols: 20,  // using cols and rows because i wanted to make it easy to edit but lets see how it plays out.
 	rows: 20,
 	difficulty: 33, // number of mines. want to implement this another way like percentage of the number of divs
-	createNewGrid: () => {
+	createNewGrid: (playerBox, grid) => {
 		const bombArray = Array(App.difficulty).fill('bomb')  //fill array with bombs
 		const emptyArray = Array(App.cols*App.rows - App.difficulty).fill('clear')
 		const gameArray = emptyArray.concat(bombArray)
 		const shuffledArray = gameArray.sort(() => Math.random() - 0.5) // randomizes position of bombs in the shuffled array
 
 		let j = 0
-		let h = 0
 		let exy = 0
-		let exy2 = 0 // trying to get solid X attribute
 		for (let i = 0; i < App.cols*App.rows; i++) {
 
-			const $playOne = $('.player1Box')
-  		const $playTwo = $('.player2Box')	// EDIT
-  		const tile = $('<div>').attr({			//sets up game for player one
+  		const tile = $('<div>').attr({			//sets up game
   			x: exy,
 				y: j,
   			class: shuffledArray[i]
-  		}).appendTo($playOne)
+  		}).appendTo(playerBox)
   		grid.push(tile)
 			j++
 			if (j > 19) {
 				j = 0
 				exy++
 			}
-			const tile2 = $('<div>').attr({		// sets up game for player two
-  			x: exy2,
-				y: h,
-  			class: shuffledArray[i]
-  		}).appendTo($playTwo)
-  		//grid.push(tile2)
-			h++
-			if (h > 19) {
-				h = 0
-				exy2++
-			}
+
 
 		}
 
-		for (let i = 0; i < (grid.length / 2); i++) {
+		for (let i = 0; i < grid.length; i++) {
 
 			let $topLeftEdge = $('div[y="0"][x="0"]')
 			let $topRightEdge = $('div[y="19"][x="0"]')
@@ -60,15 +48,16 @@ const App = {
 			if (grid[i].hasClass('clear')) {
 
 
-				if($topLeftEdge && $('div[x^=0][y^=1]').hasClass("bomb")) {
+				if(grid[i] == $topLeftEdge && $('div[x^=0][y^=1]').hasClass("bomb")) {
 					counter++
 				}
-				if($topLeftEdge && $('div[x^=1][y^=1]').hasClass("bomb")) {
+				if(grid[i] == $topLeftEdge && $('div[x^=1][y^=1]').hasClass("bomb")) {
 					counter++
 				}
-				if($topLeftEdge && $('div[x^=1][y^=0]').hasClass("bomb")) {
+				if(grid[i] == $topLeftEdge && $('div[x^=1][y^=0]').hasClass("bomb")) {
 					counter++
 				}
+				console.log(grid[i] == $topLeftEdge)
 				// if($topRightEdge &&)
 					// if ($('div[x="0"][y="1"]').hasClass('bomb')) {
 					// 	counter++
@@ -94,8 +83,7 @@ const App = {
 
 		}
 
-
-		console.log($('div[y^=0][x^=0]'))
+		
 	},
 }
 
@@ -138,8 +126,10 @@ const eventListeners = {
 
 $(() => {
 
-	App.createNewGrid()
-	console.log(grid[0])
+	App.createNewGrid($playOne, grid1)
+	App.createNewGrid($playTwo, grid2)
+
+
 
 })
 // $(() => {
