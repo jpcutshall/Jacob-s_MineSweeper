@@ -4,15 +4,16 @@ console.log("all is connected")
 //###################################################
 // 1st creating class for the individual squares on the grid
 //
-const $playOne = $('.player1Box')
-const $playTwo = $('.player2Box')
+
+
+
 let grids1 = []
 let grids2 = []
 const App = {
 	cols: 20,  // using cols and rows because i wanted to make it easy to edit but lets see how it plays out.
 	rows: 20,
 	difficulty: 33, // number of mines. want to implement this another way like percentage of the number of divs
-	createNewGrid: (playerBox, grid) => {
+	createNewGrid: (playBox, grid) => {
 		const bombArray = Array(App.difficulty).fill('bomb')  //fill array with bombs
 		const emptyArray = Array(App.cols*App.rows - App.difficulty).fill('clear')
 		const gameArray = emptyArray.concat(bombArray)
@@ -22,11 +23,13 @@ const App = {
 		let exy = 0
 		for (let i = 0; i < App.cols*App.rows; i++) {
 
-  		const tile = $('<div>').attr({			//sets up game
+			//const $playOne = $('.player1Box')
+  		//const $playTwo = $('.player2Box')	// EDIT
+  		const tile = $('<div>').attr({			//sets up game for player one
   			x: exy,
 				y: j,
   			class: shuffledArray[i]
-  		}).appendTo(playerBox)
+  		}).appendTo(playBox)
   		grid.push(tile)
 			j++
 			if (j > 19) {
@@ -83,7 +86,6 @@ const App = {
 
 		}
 
-		
 	},
 }
 
@@ -126,10 +128,12 @@ const eventListeners = {
 
 $(() => {
 
-	App.createNewGrid($playOne, grid1)
-	App.createNewGrid($playTwo, grid2)
-
-
+	const $playOne = $('.player1Box')
+	const $playTwo = $('.player2Box')
+	App.createNewGrid($playOne, grids1)
+	App.createNewGrid($playTwo, grids2)
+	console.log($('.player1Box'))
+	console.log($($playOne))
 
 })
 // $(() => {
