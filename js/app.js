@@ -51,16 +51,16 @@ const App = {
 			if (grid[i].hasClass('clear')) {
 
 
-				if(grid[i] == $topLeftEdge && $('div[x^=0][y^=1]').hasClass("bomb")) {
+				if($topLeftEdge.is(grid[i]) && $('div[x^=0][y^=1]').hasClass("bomb")) {
+					counter++
+				} else
+				if($topLeftEdge.is(grid[i]) && $('div[x^=1][y^=1]').hasClass("bomb")) {
+					counter++
+				} else
+				if($topLeftEdge.is(grid[i]) && $('div[x^=1][y^=0]').hasClass("bomb")) {
 					counter++
 				}
-				if(grid[i] == $topLeftEdge && $('div[x^=1][y^=1]').hasClass("bomb")) {
-					counter++
-				}
-				if(grid[i] == $topLeftEdge && $('div[x^=1][y^=0]').hasClass("bomb")) {
-					counter++
-				}
-				console.log(grid[i] == $topLeftEdge)
+				console.log($(grid[i]) === $topLeftEdge)
 				// if($topRightEdge &&)
 					// if ($('div[x="0"][y="1"]').hasClass('bomb')) {
 					// 	counter++
