@@ -91,8 +91,8 @@ const App = {
 			const $bottomLeftEdge = $('div[y="0"][x="19"]')
 			const $topEdge = $(`div[x="0"][y=${gridYy}]`)
 			const $bottomEdge = $(`div[x="19"][y=${gridYy}]`)
-			const $rightEdge = $(`div[x=${gridXx}][y="0"]`)
-			const $leftEdge = $(`div[x=${gridXx}][y="19"]`)
+			const $rightEdge = $(`div[x=${gridXx}][y="19"]`)
+			const $leftEdge = $(`div[x=${gridXx}][y="0"]`)
 
 			const below = gridX + 1
 			const above = gridX - 1
@@ -102,37 +102,37 @@ const App = {
 
 			if (grid[i].hasClass('clear')) {
 
-				if(grid[i].is($topEdge) && grid[i].is($leftEdge) && $('div[x="0"][y="1"]').hasClass("bomb")) {	 // top left edge work
+				if(grid[i].is($topEdge) && grid[i].is($leftEdge) && $(`div[x=${gridXx}][y=${right}]`).hasClass("bomb")) {	 // top left edge work
 					counter++
 				}
-				if(grid[i].is($topEdge) && grid[i].is($leftEdge) && $('div[x="1"][y="1"]').hasClass("bomb")) {
+				if(grid[i].is($topEdge) && grid[i].is($leftEdge) && $(`div[x=${below}][y=${right}]`).hasClass("bomb")) {
 					counter++
 				}
-				if(grid[i].is($topEdge) && grid[i].is($leftEdge) && $('div[x="1"][y="0"]').hasClass("bomb")) {
+				if(grid[i].is($topEdge) && grid[i].is($leftEdge) && $(`div[x=${below}][y=${gridYy}]`).hasClass("bomb")) {
 					counter++
 				}
-				if (grid[i].is($topEdge) && grid[i].is($rightEdge) && $('div[x="0"][y="18"]').hasClass('bomb')) { // top right edge work
+				if (grid[i].is($topEdge) && grid[i].is($rightEdge) && $(`div[x=${gridXx}][y=${left}]`).hasClass('bomb')) { // top right edge work
 					counter++
 				}
-				if (grid[i].is($topEdge) && grid[i].is($rightEdge) && $('div[x="1"][y="18"]').hasClass('bomb')) {
+				if (grid[i].is($topEdge) && grid[i].is($rightEdge) && $(`div[x=${below}][y=${gridYy}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($topEdge) && grid[i].is($rightEdge) && $('div[x="0"][y="19"]').hasClass('bomb')) {
+				if (grid[i].is($topEdge) && grid[i].is($rightEdge) && $(`div[x=${below}][y=${left}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($topEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) {	//top edge work
+				if (grid[i].is($topEdge) && !grid[i].is($leftEdge) && !grid[i].is($rightEdge) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) {	//top edge work
 					counter++
 				}
-				if (grid[i].is($topEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${gridX}][y=${left}]`).hasClass('bomb')) {
+				if (grid[i].is($topEdge) && !grid[i].is($leftEdge) && !grid[i].is($rightEdge) && $(`div[x=${gridX}][y=${left}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($topEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${gridX}][y=${right}]`).hasClass('bomb')) {
+				if (grid[i].is($topEdge) && !grid[i].is($leftEdge) && !grid[i].is($rightEdge) && $(`div[x=${gridX}][y=${right}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($topEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${below}][y=${right}]`).hasClass('bomb')) {
+				if (grid[i].is($topEdge) && !grid[i].is($leftEdge) && !grid[i].is($rightEdge) && $(`div[x=${below}][y=${right}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($topEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${left}][y=${right}]`).hasClass('bomb')) {
+				if (grid[i].is($topEdge) && !grid[i].is($leftEdge) && !grid[i].is($rightEdge) && $(`div[x=${left}][y=${right}]`).hasClass('bomb')) {
 					counter++
 				}
 				if(grid[i].is($bottomEdge) && grid[i].is($leftEdge) && $(`div[x=${above}][y=${gridY}]`).hasClass("bomb")) {  //bottom left edge work
@@ -153,53 +153,53 @@ const App = {
 				if (grid[i].is($bottomEdge) && grid[i].is($rightEdge) && $(`div[x=${above}][y=${left}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($bottomEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${above}][y=${gridY}]`).hasClass('bomb')) { // bottom Edge work
+				if (grid[i].is($bottomEdge) && !grid[i].is($leftEdge) && !grid[i].is($rightEdge) && $(`div[x=${above}][y=${gridY}]`).hasClass('bomb')) { // bottom Edge work
 					counter++
 				}
-				if (grid[i].is($bottomEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${above}][y=${right}]`).hasClass('bomb')) {
+				if (grid[i].is($bottomEdge) && !grid[i].is($leftEdge) && !grid[i].is($rightEdge) && $(`div[x=${above}][y=${right}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($bottomEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${above}][y=${left}]`).hasClass('bomb')) {
+				if (grid[i].is($bottomEdge) && !grid[i].is($leftEdge) && !grid[i].is($rightEdge) && $(`div[x=${above}][y=${left}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($bottomEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${gridX}][y=${right}]`).hasClass('bomb')) {
+				if (grid[i].is($bottomEdge) && !grid[i].is($leftEdge) && !grid[i].is($rightEdge) && $(`div[x=${gridX}][y=${right}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($bottomEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${gridX}][y=${left}]`).hasClass('bomb')) {
-					counter++
-				}
-
-
-				if (grid[i].is($rightEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${gridX}][y=${gridX -1}]`).hasClass('bomb')) { // Right Edge work
-					counter++
-				}
-				if (grid[i].is($rightEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${above}][y=${left}]`).hasClass('bomb')) {
-					counter++
-				}
-				if (grid[i].is($rightEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${below}][y=${left}]`).hasClass('bomb')) {
-					counter++
-				}
-				if (grid[i].is($rightEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${above}][y=${gridY}]`).hasClass('bomb')) {
-					counter++
-				}
-				if (grid[i].is($rightEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) {
+				if (grid[i].is($bottomEdge) && !grid[i].is($leftEdge) && !grid[i].is($rightEdge) && $(`div[x=${gridX}][y=${left}]`).hasClass('bomb')) {
 					counter++
 				}
 
 
-				if (grid[i].is($leftEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${gridX}][y=${right}]`).hasClass('bomb')) { // LEft Edge work
+				if (grid[i].is($rightEdge) && (!grid[i].is($bottomEdge) && !grid[i].is($topEdge)) && $(`div[x=${gridX}][y=${left}]`).hasClass('bomb')) { // Right Edge work
 					counter++
 				}
-				if (grid[i].is($leftEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${above}][y=${right}]`).hasClass('bomb')) { // square up one right one
+				if (grid[i].is($rightEdge) && (!grid[i].is($bottomEdge) && !grid[i].is($topEdge)) && $(`div[x=${above}][y=${left}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($leftEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${below}][y=${right}]`).hasClass('bomb')) {
+				if (grid[i].is($rightEdge) && (!grid[i].is($bottomEdge) && !grid[i].is($topEdge)) && $(`div[x=${below}][y=${left}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($leftEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${above}][y=${gridY}]`).hasClass('bomb')) {
+				if (grid[i].is($rightEdge) && (!grid[i].is($bottomEdge) && !grid[i].is($topEdge)) && $(`div[x=${above}][y=${gridY}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($leftEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) {
+				if (grid[i].is($rightEdge) && (!grid[i].is($bottomEdge) && !grid[i].is($topEdge)) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) {
+					counter++
+				}
+
+
+				if (grid[i].is($leftEdge) && !grid[i].is($topEdge) && !grid[i].is($bottomEdge) && $(`div[x=${gridX}][y=${right}]`).hasClass('bomb')) { // LEft Edge work
+					counter++
+				}
+				if (grid[i].is($leftEdge) && !grid[i].is($topEdge) && !grid[i].is($bottomEdge) && $(`div[x=${above}][y=${right}]`).hasClass('bomb')) { // square up one right one
+					counter++
+				}
+				if (grid[i].is($leftEdge) && !grid[i].is($topEdge) && !grid[i].is($bottomEdge) && $(`div[x=${below}][y=${right}]`).hasClass('bomb')) {
+					counter++
+				}
+				if (grid[i].is($leftEdge) && !grid[i].is($topEdge) && !grid[i].is($bottomEdge) && $(`div[x=${above}][y=${gridY}]`).hasClass('bomb')) {
+					counter++
+				}
+				if (grid[i].is($leftEdge) && !grid[i].is($topEdge) && !grid[i].is($bottomEdge) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) {
 					counter++
 				}
 
