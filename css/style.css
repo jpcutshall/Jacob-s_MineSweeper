@@ -25,6 +25,7 @@ button {
 	margin-right: 5px;
 	margin-left: 3px;
 }
+
 .users {
 	display: flex;
 	flex-direction: row;
@@ -80,7 +81,13 @@ button {
 	width: 20px;
 	display: flex;
 	flex-flow: row;
+	justify-content: center;
+	font-family: monospace;
 }
 .game-box div .bomb {
 	background-color: tomato;
+}
+
+.game-box div .checked {
+	background-color: white;
 }

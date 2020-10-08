@@ -23,8 +23,18 @@ const eventListeners = {
 		App.difficulty = 132;
 	},
 	click: (tile) => {
+		//if (gameOver) return
+		if (tile.hasClass('checked')) return
 		if (tile.hasClass('bomb')) {  // end game for player
 			alert(`you hit a mine!`)
+		} else {
+			let total = tile.attr('nearby')
+			if (total != 0) {
+				tile.addClass('checked')
+				tile.html(total)
+				return
+			}
+			tile.addClass('checked')
 		}
 	},
 	start: () => {
@@ -74,13 +84,15 @@ const App = {
 
 			const gridX = parseInt(grid[i].attr("x"))
 			const gridY = parseInt(grid[i].attr("y"))
+			const gridXx = grid[i].attr("x")
+			const gridYy = grid[i].attr("y")
 			const $topLeftEdge = $('div[y="0"][x="0"]')
 			const $topRightEdge = $('div[y="19"][x="0"]')
 			const $bottomLeftEdge = $('div[y="0"][x="19"]')
-			const $topEdge = $(`div[y=${gridY}][x="0"]`)
-			const $bottomEdge = $(`div[y=${gridY}][x="19"]`)
-			const $rightEdge = $(`div[y="0"][x=${gridX}]`)
-			const $leftEdge = $(`div[y="19"][x=${gridX}]`)
+			const $topEdge = $(`div[x="0"][y=${gridYy}]`)
+			const $bottomEdge = $(`div[x="19"][y=${gridYy}]`)
+			const $rightEdge = $(`div[x=${gridXx}][y="0"]`)
+			const $leftEdge = $(`div[x=${gridXx}][y="19"]`)
 
 			const below = gridX + 1
 			const above = gridX - 1
@@ -90,37 +102,37 @@ const App = {
 
 			if (grid[i].hasClass('clear')) {
 
-				if(grid[i].is($topLeftEdge) && $('div[x="0"][y="1"]').hasClass("bomb")) {	 // top left edge work
+				if(grid[i].is($topEdge) && grid[i].is($leftEdge) && $('div[x="0"][y="1"]').hasClass("bomb")) {	 // top left edge work
 					counter++
 				}
-				if(grid[i].is($topLeftEdge) && $('div[x="1"][y="1"]').hasClass("bomb")) {
+				if(grid[i].is($topEdge) && grid[i].is($leftEdge) && $('div[x="1"][y="1"]').hasClass("bomb")) {
 					counter++
 				}
-				if(grid[i].is($topLeftEdge) && $('div[x="1"][y="0"]').hasClass("bomb")) {
+				if(grid[i].is($topEdge) && grid[i].is($leftEdge) && $('div[x="1"][y="0"]').hasClass("bomb")) {
 					counter++
 				}
-				if (grid[i].is($topRightEdge) && $('div[x="0"][y="18"]').hasClass('bomb')) { // top right edge work
+				if (grid[i].is($topEdge) && grid[i].is($rightEdge) && $('div[x="0"][y="18"]').hasClass('bomb')) { // top right edge work
 					counter++
 				}
-				if (grid[i].is($topRightEdge) && $('div[x="1"][y="18"]').hasClass('bomb')) {
+				if (grid[i].is($topEdge) && grid[i].is($rightEdge) && $('div[x="1"][y="18"]').hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($topRightEdge) && $('div[x="0"][y="19"]').hasClass('bomb')) {
+				if (grid[i].is($topEdge) && grid[i].is($rightEdge) && $('div[x="0"][y="19"]').hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($topEdge) && (!grid[i].is($topLeftEdge) || !grid[i].is($topRightEdge)) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) {	//top edge work
+				if (grid[i].is($topEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) {	//top edge work
 					counter++
 				}
-				if (grid[i].is($topEdge) && (!grid[i].is($topLeftEdge) || !grid[i].is($topRightEdge)) && $(`div[x=${gridX}][y=${left}]`).hasClass('bomb')) {
+				if (grid[i].is($topEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${gridX}][y=${left}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($topEdge) && (!grid[i].is($topLeftEdge) || !grid[i].is($topRightEdge)) && $(`div[x=${gridX}][y=${right}]`).hasClass('bomb')) {
+				if (grid[i].is($topEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${gridX}][y=${right}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($topEdge) && (!grid[i].is($topLeftEdge) || !grid[i].is($topRightEdge)) && $(`div[x=${below}][y=${right}]`).hasClass('bomb')) {
+				if (grid[i].is($topEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${below}][y=${right}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($topEdge) && (!grid[i].is($topLeftEdge) || !grid[i].is($topRightEdge)) && $(`div[x=${left}][y=${right}]`).hasClass('bomb')) {
+				if (grid[i].is($topEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${left}][y=${right}]`).hasClass('bomb')) {
 					counter++
 				}
 				if(grid[i].is($bottomEdge) && grid[i].is($leftEdge) && $(`div[x=${above}][y=${gridY}]`).hasClass("bomb")) {  //bottom left edge work
@@ -156,7 +168,9 @@ const App = {
 				if (grid[i].is($bottomEdge) && (!grid[i].is($leftEdge) || !grid[i].is($rightEdge)) && $(`div[x=${gridX}][y=${left}]`).hasClass('bomb')) {
 					counter++
 				}
-				if (grid[i].is($rightEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${gridX}][y=${left}]`).hasClass('bomb')) { // Right Edge work
+
+
+				if (grid[i].is($rightEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${gridX}][y=${gridX -1}]`).hasClass('bomb')) { // Right Edge work
 					counter++
 				}
 				if (grid[i].is($rightEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${above}][y=${left}]`).hasClass('bomb')) {
@@ -171,6 +185,8 @@ const App = {
 				if (grid[i].is($rightEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) {
 					counter++
 				}
+
+
 				if (grid[i].is($leftEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${gridX}][y=${right}]`).hasClass('bomb')) { // LEft Edge work
 					counter++
 				}
@@ -186,6 +202,10 @@ const App = {
 				if (grid[i].is($leftEdge) && (!grid[i].is($topEdge) || !grid[i].is($bottomEdge)) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) {
 					counter++
 				}
+
+
+
+
 				if (!grid[i].is($leftEdge) && !grid[i].is($rightEdge) && !grid[i].is($topEdge) && !grid[i].is($bottomEdge) && $(`div[x=${below}][y=${gridY}]`).hasClass('bomb')) { // squares not on an edge -- Works perfect in first box but not second and other checkers are broken!?
 					counter++
 				}
@@ -224,14 +244,18 @@ const App = {
 
 $(() => {
 
+
+
 	const $playOne = $('.player1Box')
 	const $playTwo = $('.player2Box')
+	$playTwo.remove()
 	App.createNewGrid($playOne, grids1)
 
 	$("#1player").on('click', () => {
 		eventListeners.onePlayer()
 	})
 	$("#2player").on('click', () => {
+		$('.game-box').append($playTwo)
 		App.createNewGrid($playTwo, grids2)
 	})
 
