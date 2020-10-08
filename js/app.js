@@ -5,6 +5,7 @@ console.log("all is connected")
 // 1st creating class for the individual squares on the grid
 //
 let grid = []
+let grid2 = []
 const App = {
 	cols: 20,  // using cols and rows because i wanted to make it easy to edit but lets see how it plays out.
 	rows: 20,
@@ -39,7 +40,7 @@ const App = {
 				y: h,
   			class: shuffledArray[i]
   		}).appendTo($playTwo)
-  		grid.push(tile2)
+  		//grid.push(tile2)
 			h++
 			if (h > 19) {
 				h = 0
@@ -48,16 +49,53 @@ const App = {
 
 		}
 
-		for (let i = 0; i < grid.length; i++) {
+		for (let i = 0; i < (grid.length / 2); i++) {
 
+			let $topLeftEdge = $('div[y="0"][x="0"]')
+			let $topRightEdge = $('div[y="19"][x="0"]')
+			let $bottomLeftEdge = $('div[y="0"][x="19"]')
+			let $topEdge = $('div[x="0"]')
+			let $bottomEdge = $('div[x="19"]')
+			let counter = 0
 			if (grid[i].hasClass('clear')) {
+
+
+				if($topLeftEdge && $('div[x^=0][y^=1]').hasClass("bomb")) {
+					counter++
+				}
+				if($topLeftEdge && $('div[x^=1][y^=1]').hasClass("bomb")) {
+					counter++
+				}
+				if($topLeftEdge && $('div[x^=1][y^=0]').hasClass("bomb")) {
+					counter++
+				}
+				// if($topRightEdge &&)
+					// if ($('div[x="0"][y="1"]').hasClass('bomb')) {
+					// 	counter++
+					// } else if ($('div[x="1"][y="1"]').hasClass('bomb')) {
+					// 	counter++
+					// } else if ($('div[x="1"][y="0"]').hasClass('bomb')) {
+					// 	counter++
+					// }
+
+				// if ($topRightEdge) {
+				// 	if ($('div[x="0"][y="18"]').hasClass('bomb')) {
+				// 		counter++
+				// 	} else if ($('div[x="1"][y="18"]').hasClass('bomb')) {
+				// 		counter++
+				// 	} else if ($('div[x="1"][y="19"]').hasClass('bomb')) {
+				// 		counter++
+				// 	}
+				//
+				// }
+				grid[i].attr('nearby', counter)
 
 			}
 
 		}
 
 
-
+		console.log($('div[y^=0][x^=0]'))
 	},
 }
 
@@ -101,6 +139,8 @@ const eventListeners = {
 $(() => {
 
 	App.createNewGrid()
+	console.log(grid[0])
+
 })
 // $(() => {
 //
