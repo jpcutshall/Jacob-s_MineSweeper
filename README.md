@@ -15,7 +15,7 @@ First project for General Assembly
 
 --- 
 ## WireFrame
-
+![image of WireDoodle](wire.JPG)
 
 ---
 ## User Story
