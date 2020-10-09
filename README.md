@@ -13,7 +13,7 @@ First project for General Assembly
     - eventListeners just holds callback functions for my events
     - Really think The game needs to be setup with a class but I cant think of how to do it
   - when start button is pressed 'App.createGrid()'
-    - creates a shuffled Array of '$(<div>)' with class of mines shuffled in and event Listener for both clicks
+    - creates a shuffled Array of '$(div)' with class of mines shuffled in and event Listener for both clicks
     - appends them to the game box divs
     - applies number values to squares with x amount of mines nearby
   - clicking on a square adds class checked and checks if it is a mine for game over condition
