@@ -74,7 +74,7 @@ h2 button:hover{
 	justify-content: center;
 }
 .game-box div {
-	border: 1px dashed black;
+	border: 1px dotted black;
 	background-color: cornsilk;
 	width: 440px;
 	height: 440px;
