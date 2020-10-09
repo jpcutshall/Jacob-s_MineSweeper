@@ -19,6 +19,7 @@ First project for General Assembly
   - clicking on a square adds class checked and checks if it is a mine for game over condition
     - if its not a mine or square near mine its starts checking nearby for blank squares and checks(shows) them
     - every time flag is placed win condition is checked because having the flags on the same unchecked squares as a mine equals a win
+  - Reset button will reset everything to its default value - how to page looks when it loaded
 
 ### Biggest Issues
 1 . Checking nearby squares if mine and adding how many are around - took me a couple days and is not very readable
