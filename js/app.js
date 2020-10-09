@@ -22,6 +22,19 @@ const eventListeners = {
 	extreme: () => {
 		App.difficulty = 132;
 	},
+	addFlag: (tile) => {      // called when right clicked
+		if (App.isGameOver) return
+		if (!tile.hasClass('checked')) {
+			if (!tile.hasClass('flag')) {
+				tile.addClass('flag').text('🚩')
+				flags--
+
+			} else {
+				tile.removeClass('flag').text('')
+				flags++
+			}
+		}
+	},
 	click: (tile, grid) => {
 		let x = tile.attr("x")
 		let y = tile.attr("y")
@@ -54,15 +67,15 @@ let grids2 = []
 const App = {
 	cols: 20,  // using cols and rows because i wanted to make it easy to edit but lets see how it plays out.
 	rows: 20,
-	difficulty: 40,// number of mines. want to implement this another way like percentage of the number of divs
+	difficulty: 40, // number of mines. want to implement this another way like percentage of the number of divs
 	isGameOver: false,
 	gameOver: (tile, grid) => {
 		console.log('Game is over')
 		App.isGameOver = true
 
-		grid.forEach( tile => {
+		grid.forEach( (tile) => {
 			if (tile.hasClass('bomb')) {
-				tile.html('📍')
+				tile.text('📍').addClass('checked')
 			}
 		})
 
@@ -122,6 +135,11 @@ const App = {
 			tile.on("click", () => {
 				eventListeners.click(tile, grid)
 			})
+
+			tile.on("contextmenu", () => {
+				eventListeners.addFlag(tile)
+			})
+
 		}
 
 		for (let i = 0; i < grid.length; i++) {
@@ -211,7 +229,7 @@ const App = {
 
 
 
-
+	let flags = App.difficulty
 	const $playOne = $('.player1Box')
 	const $playTwo = $('.player2Box')
 	$playTwo.remove()
@@ -225,6 +243,6 @@ const App = {
 		App.createNewGrid($playTwo, grids2)
 	})
 
-
+ console.log(flags)
 
 })
