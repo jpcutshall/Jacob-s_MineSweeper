@@ -83,6 +83,7 @@ const eventListeners = {
 		App.isGameOver = false
 		grids1 = []
 		$playOne.empty()
+		$("#gameresult").text('')
 	}
 }
 
@@ -97,6 +98,7 @@ const App = {
 
 	gameWin: (square) => {
 		let matches = 0
+		const $gameMessage = $("#gameresult")
 		for (let i = 0; i < grids1.length; i++) {
 		 if (grids1[i].hasClass('flag') && grids1[i].hasClass('bomb')) {
 		 	matches++
@@ -105,19 +107,19 @@ const App = {
 		}
 		if (matches === App.difficulty) {
 		 if (App.difficulty === 40) {
-			 alert("YOU BEAT MY GAME ON EASY! BUT CAN YOU HANDLE HARD?")
+			 $gameMessage.text("YOU BEAT MY GAME ON EASY! BUT CAN YOU HANDLE HARD?")
 		 }
 		 if (App.difficulty === 66) {
-			 alert("IMPRESSIVE! YOU BEAT MY GAME ON HARD! BUT ARE YOU GOOD ENOUGH FOR EXTREME?")
+			 $gameMessage.text("IMPRESSIVE! YOU BEAT MY GAME ON HARD! BUT ARE YOU GOOD ENOUGH FOR EXTREME?")
 		 }
 		 if(App.difficulty === 132){
-			 alert('GG YOU SUPERIOR')
+			 $gameMessage.text('GG YOU SUPERIOR')
 		 }
 		}
 	},
 
 	gameOver: (tile, square) => {
-		console.log('Game is lost')
+		const $gameMessage = $("#gameresult")
 		App.isGameOver = true
 
 		square.forEach( (tile) => {
@@ -126,7 +128,7 @@ const App = {
 			}
 		})
 
-		alert("YOU HIT A MINE! ALL IS LOST!")
+		$gameMessage.text("YOU HIT A MINE! ALL IS LOST!")
 
 	},
 
@@ -284,11 +286,27 @@ const App = {
 	let tile2 = $
 	const $playOne = $('.player1Box')
 	const $playTwo = $('.player2Box')
+	const $modal = $("#myModal")
+	const $modalBtn = $("#modalBtn")
+	const $close = $(".close")
 	$playTwo.remove()
 
 
 
  //######## BUTTONS ON PAGE ################
+	$modalBtn.on("click", () => {
+		$modal.css("display", "block")
+	})
+
+	$close.on('click', () => {
+		$modal.css("display", "none")
+	})
+
+	$modal.on('click', () => {
+			$modal.css("display", "none")
+
+	})
+
 	$("#oneplayer").on('click', () => {
 		eventListeners.onePlayer()
 	})
