@@ -22,9 +22,9 @@ First project for General Assembly
   - Reset button will reset everything to its default value - how to page looks when it loaded
 
 ### Biggest Issues
-1 . Checking nearby squares if mine and adding how many are around - took me a couple days and is not very readable
-  2. When player 2 Board was created it would get mine positions from player 1 board and player 2 board(wrong mine counts) - stopped working on player 2 here(problem with tile or grid value inside App.createNewGrid)
-  3. Never got css(div and box) sizing down for custom game size - need more css practice
+1. Checking nearby squares if mine and adding how many are around - took me a couple days and is not very readable
+2. When player 2 Board was created it would get mine positions from player 1 board and player 2 board(wrong mine counts) - stopped working on player 2 here(problem with tile or grid value inside App.createNewGrid)
+3. Never got css(div and box) sizing down for custom game size - need more css practice
 
 ### future Features
   1. I want to get player 2 working
