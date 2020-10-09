@@ -132,7 +132,7 @@ const App = { // App Data and Functions
 
 		square.forEach( (tile) => {  // shows all bombs
 			if (tile.hasClass('bomb')) {
-				tile.text('📍').addClass('checked')
+				tile.text('💥').addClass('checked')
 			}
 		})
 
