@@ -26,7 +26,14 @@ button {
 	margin-right: 5px;
 	margin-left: 3px;
 }
-
+h2 button{
+	border: 0px solid black;
+	background-color: blanchedalmond;
+}
+h2 button:hover{
+	color: teal;
+	text-decoration: underline;	
+}
 .users {
 	display: flex;
 	flex-direction: row;
@@ -86,7 +93,7 @@ button {
 	font-family: monospace;
 }
 .game-box div .bomb {
-	background-color: tomato;
+	background-color: lightgrey;
 }
 
 .game-box div .checked {
@@ -97,8 +104,9 @@ button {
 	text-decoration: line-through;
 }
 
-#modalBtn {
-
+#gameresult {
+	font-size: 40px;
+	color: orangered;
 }
 
 .modal {

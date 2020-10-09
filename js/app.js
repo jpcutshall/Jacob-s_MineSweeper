@@ -1,9 +1,9 @@
-console.log("all is connected")
+console.log("app.js is connected")
 
 $(() => {
-const eventListeners = {
+const eventListeners = {  //stores all callbacks for click events
 	onePlayer: () => {
-		App.createNewGrid($playOne, grids1, tile1)
+		App.createNewGrid($playOne, grids1)
 	},
 
 	twoPlayer: () => {    // TWO PLAYER DOES NOT WORK - NOT WRITTEN RIGHT FOR IT
@@ -17,8 +17,9 @@ const eventListeners = {
 		const $settings = $("#settings")
 		if ($settings.text().includes("-Hard Difficulty") || $settings.text().includes("-Extreme Difficulty")) {
 			$settings.text('Settings:-Easy Difficulty')
-		} else {
-			$("#settings").append('-Easy Difficulty')
+		}
+		if($settings.text().includes("-Easy Difficulty")){
+			return
 		}
 	},
 
@@ -28,6 +29,8 @@ const eventListeners = {
 		const $settings = $("#settings")
 		if ($settings.text().includes("-Easy Difficulty") || $settings.text().includes("-Extreme Difficulty")) {
 			$settings.text('Settings:-Hard Difficulty')
+		} if ($settings.text().includes("-Hard Difficulty")) {
+			return
 		} else {
 			$("#settings").append('-Hard Difficulty')
 		}
@@ -39,12 +42,14 @@ const eventListeners = {
 		const $settings = $("#settings")
 		if ($settings.text().includes("-Easy Difficulty") || $settings.text().includes("-Hard Difficulty")) {
 			$settings.text('Settings:-Extreme Difficulty')
+		} if ($settings.text().includes("-Extreme Difficulty")) {
+			return
 		} else {
 			$("#settings").append('-Extreme Difficulty')
 		}
 	},
 
-	addFlag: (tile, square) => {      // called when right clicked
+	addFlag: (tile, square) => {      // RIGHT click on tile callback - Adds Flag
 		if (App.isGameOver) return
 		if (!tile.hasClass('checked') && (App.flags <= App.difficulty)) {
 			if (!tile.hasClass('flag')) {
@@ -58,7 +63,7 @@ const eventListeners = {
 		}
 	},
 
-	click: (tile, grid) => {
+	click: (tile, grid) => {  // Tile click event callback - marks tile checked or you lost
 		let x = tile.attr("x")
 		let y = tile.attr("y")
 		if (App.isGameOver) return
@@ -78,7 +83,7 @@ const eventListeners = {
 		tile.addClass('checked')
 	},
 
-	reset: () => {
+	reset: () => {  // RESET button callback
 		App.flags = 0
 		App.isGameOver = false
 		grids1 = []
@@ -88,15 +93,14 @@ const eventListeners = {
 }
 
 
-const App = {
+const App = { // App Data and Functions
 	cols: 20,  // using cols and rows because i wanted to make it easy to edit but lets see how it plays out.
 	rows: 20,
 	difficulty: 40, // number of mines. want to implement this another way like percentage of the number of divs
 	flags: 0,
-	isGameWin: false,
 	isGameOver: false,
 
-	gameWin: (square) => {
+	gameWin: (square) => { // checking if you have won the game
 		let matches = 0
 		const $gameMessage = $("#gameresult")
 		for (let i = 0; i < grids1.length; i++) {
@@ -118,7 +122,7 @@ const App = {
 		}
 	},
 
-	gameOver: (tile, square) => {
+	gameOver: (tile, square) => { // checking if you lost the game by hitting a mine
 		const $gameMessage = $("#gameresult")
 		App.isGameOver = true
 
@@ -132,7 +136,7 @@ const App = {
 
 	},
 
-	checkTile: (square, x, y) => { // checking tiles nearby after click
+	checkTile: (square, x, y) => { // checking tiles nearby can show if not a mine
 		const gridX = parseInt(square.attr("x"))
 		const gridY = parseInt(square.attr("y"))
 		const gridXx = square.attr("x")
@@ -162,7 +166,7 @@ const App = {
 
 	},
 
-	createNewGrid: (playBox, grid) => {
+	createNewGrid: (playBox, grid) => { // SOFTWAREGORE creates new gameboard for the player
 		const bombArray = Array(App.difficulty).fill('bomb')  //fill array with bombs
 		const emptyArray = Array(App.cols*App.rows - App.difficulty).fill('clear')
 		const gameArray = emptyArray.concat(bombArray)
@@ -281,9 +285,7 @@ const App = {
 
 
 	let grids1 = []
-	let grids2 = []
-	let tile1 = $
-	let tile2 = $
+	//let grids2 = []
 	const $playOne = $('.player1Box')
 	const $playTwo = $('.player2Box')
 	const $modal = $("#myModal")
