@@ -1,7 +1,7 @@
 # Jacob-s_MineSweeper
 First project for General Assembly
 ---
-##About
+## About
  I chose to recreate mineSweeper because I wanted to be challenged and learn something new. It was a lot more challenging than I thought, but I am glad to have gotten it working correctly! My original intent was to make it Two player with two different games going on at once. The players would take turns playing their box (would be very slow game with the current setup). Got one player working flawlessy with choosing difficulty, creating a random board, and resetting.
  ### Biggest Issues
   1. Checking nearby squares if mine and adding how many are around - took me a couple days and is not very readable
@@ -14,12 +14,11 @@ First project for General Assembly
   3. custom game size - current is 20x20
 
 --- 
-
-##WireFrame
-
+## WireFrame
 
 
-##User Story
+---
+## User Story
 1. User clicks How To Play Button Which pops up a modal with the rules to playing
 2. User clicks on which difficulty they want which changes the amount of mines
 3. User Clicks 1 Player Start or Two player Start to begin one or two games (one player only right now) - supposed to take turns clicking on there game grid
