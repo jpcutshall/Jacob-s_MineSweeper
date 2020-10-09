@@ -1,40 +1,63 @@
 console.log("all is connected")
 
-
-//###################################################
-// 1st creating class for the individual squares on the grid
-//
 $(() => {
 const eventListeners = {
-	onePlayer: () => {					// will remove the second player div
-		const $secondDiv = $('.player2Box')
-		$secondDiv.remove()
+	onePlayer: () => {
+		App.createNewGrid($playOne, grids1, tile1)
 	},
-	twoPlayer: () => {
 
+	twoPlayer: () => {    // TWO PLAYER DOES NOT WORK - NOT WRITTEN RIGHT FOR IT
+		$('.game-box').append($playTwo)
+		App.createNewGrid($playTwo, grids2, tile2)
 	},
+
+	//set game difficulty to easy-default
 	easy: () => {
 		App.difficulty = 40;
+		const $settings = $("#settings")
+		if ($settings.text().includes("-Hard Difficulty") || $settings.text().includes("-Extreme Difficulty")) {
+			$settings.text('Settings:-Easy Difficulty')
+		} else {
+			$("#settings").append('-Easy Difficulty')
+		}
 	},
+
+	//set game difficulty to HARD
 	hard: () => {
 		App.difficulty = 66;
+		const $settings = $("#settings")
+		if ($settings.text().includes("-Easy Difficulty") || $settings.text().includes("-Extreme Difficulty")) {
+			$settings.text('Settings:-Hard Difficulty')
+		} else {
+			$("#settings").append('-Hard Difficulty')
+		}
 	},
+
+	//set game difficulty to EXTREME
 	extreme: () => {
 		App.difficulty = 132;
+		const $settings = $("#settings")
+		if ($settings.text().includes("-Easy Difficulty") || $settings.text().includes("-Hard Difficulty")) {
+			$settings.text('Settings:-Extreme Difficulty')
+		} else {
+			$("#settings").append('-Extreme Difficulty')
+		}
 	},
-	addFlag: (tile) => {      // called when right clicked
+
+	addFlag: (tile, square) => {      // called when right clicked
 		if (App.isGameOver) return
-		if (!tile.hasClass('checked')) {
+		if (!tile.hasClass('checked') && (App.flags <= App.difficulty)) {
 			if (!tile.hasClass('flag')) {
 				tile.addClass('flag').text('🚩')
-				flags--
-
+				App.flags++
+				App.gameWin(square)
 			} else {
 				tile.removeClass('flag').text('')
-				flags++
+				App.flags--
 			}
 		}
 	},
+
 	click: (tile, grid) => {
 		let x = tile.attr("x")
 		let y = tile.attr("y")
@@ -54,33 +77,59 @@ const eventListeners = {
 		}
 		tile.addClass('checked')
 	},
-	start: () => {
-		App.createNewGrid()
-	},
-	stop: () => {
 
+	reset: () => {
+		App.flags = 0
+		App.isGameOver = false
+		grids1 = []
+		$playOne.empty()
 	}
 }
 
-let grids1 = []
-let grids2 = []
+
 const App = {
 	cols: 20,  // using cols and rows because i wanted to make it easy to edit but lets see how it plays out.
 	rows: 20,
 	difficulty: 40, // number of mines. want to implement this another way like percentage of the number of divs
+	flags: 0,
+	isGameWin: false,
 	isGameOver: false,
-	gameOver: (tile, grid) => {
-		console.log('Game is over')
+
+	gameWin: (square) => {
+		let matches = 0
+		for (let i = 0; i < grids1.length; i++) {
+		 if (grids1[i].hasClass('flag') && grids1[i].hasClass('bomb')) {
+		 	matches++
+		 }
+
+		}
+		if (matches === App.difficulty) {
+		 if (App.difficulty === 40) {
+			 alert("YOU BEAT MY GAME ON EASY! BUT CAN YOU HANDLE HARD?")
+		 }
+		 if (App.difficulty === 66) {
+			 alert("IMPRESSIVE! YOU BEAT MY GAME ON HARD! BUT ARE YOU GOOD ENOUGH FOR EXTREME?")
+		 }
+		 if(App.difficulty === 132){
+			 alert('GG YOU SUPERIOR')
+		 }
+		}
+	},
+
+	gameOver: (tile, square) => {
+		console.log('Game is lost')
 		App.isGameOver = true
 
-		grid.forEach( (tile) => {
+		square.forEach( (tile) => {
 			if (tile.hasClass('bomb')) {
 				tile.text('📍').addClass('checked')
 			}
 		})
 
+		alert("YOU HIT A MINE! ALL IS LOST!")
 
 	},
+
 	checkTile: (square, x, y) => { // checking tiles nearby after click
 		const gridX = parseInt(square.attr("x"))
 		const gridY = parseInt(square.attr("y"))
@@ -110,6 +159,7 @@ const App = {
 		}, 50)
 
 	},
+
 	createNewGrid: (playBox, grid) => {
 		const bombArray = Array(App.difficulty).fill('bomb')  //fill array with bombs
 		const emptyArray = Array(App.cols*App.rows - App.difficulty).fill('clear')
@@ -120,7 +170,7 @@ const App = {
 		let exy = 0
 		for (let i = 0; i < App.cols*App.rows; i++) {
 
-  		const tile = $('<div>').attr({			//sets up game for player one
+  		const tile = $('<div>').attr({			//sets up game grid
   			x: exy,
 				y: j,
   			class: shuffledArray[i]
@@ -137,12 +187,12 @@ const App = {
 			})
 
 			tile.on("contextmenu", () => {
-				eventListeners.addFlag(tile)
+				eventListeners.addFlag(tile, grid)
 			})
 
 		}
 
-		for (let i = 0; i < grid.length; i++) {
+		for (let i = 0; i < grid.length; i++) {  // checks nearby boxes for mines and counts
 
 			const gridX = parseInt(grid[i].attr("x"))
 			const gridY = parseInt(grid[i].attr("y"))
@@ -228,21 +278,47 @@ const App = {
 
 
 
-
-	let flags = App.difficulty
+	let grids1 = []
+	let grids2 = []
+	let tile1 = $
+	let tile2 = $
 	const $playOne = $('.player1Box')
 	const $playTwo = $('.player2Box')
 	$playTwo.remove()
-	App.createNewGrid($playOne, grids1)
 
-	$("#1player").on('click', () => {
+
+
+ //######## BUTTONS ON PAGE ################
+	$("#oneplayer").on('click', () => {
 		eventListeners.onePlayer()
 	})
-	$("#2player").on('click', () => {
-		$('.game-box').append($playTwo)
-		App.createNewGrid($playTwo, grids2)
+
+	$("#twoplayer").on('click', () => {  //PLAYER 2 DOES NOT WORK
+		//eventListeners.twoPlayer()
 	})
 
- console.log(flags)
+	$("#easyGame").on('click', () => {
+		eventListeners.easy()
+		console.log(App.difficulty)
+	})
+
+	$("#hardGame").on('click', () => {
+		eventListeners.hard()
+		console.log(App.difficulty)
+	})
+
+	$("#extremeGame").on('click', () => {
+		eventListeners.extreme()
+		console.log(App.difficulty)
+	})
+
+	$("#reset").on('click', () => {
+		eventListeners.reset()
+	})
+ ////######## BUTTONS ON PAGE ################
+
+
+
+
 
 })

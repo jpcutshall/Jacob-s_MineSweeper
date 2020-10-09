@@ -3,6 +3,7 @@ body {
 	margin: 10px;
 	padding: 6px;
 	background-color: blanchedalmond;
+	font-family: monospace;
 }
 h1 {
 	border: 2px solid grey;
@@ -45,7 +46,7 @@ button {
 	font-size: 18px;
 
 }
-.start-reset {
+.reset {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -66,7 +67,7 @@ button {
 }
 .game-box div {
 	border: 1px solid black;
-	background-color: violet;
+	background-color: cornsilk;
 	width: 440px;
 	height: 440px;
 	display: flex;
@@ -85,9 +86,13 @@ button {
 	font-family: monospace;
 }
 .game-box div .bomb {
-	background-color: lightgrey;
+	background-color: tomato;
 }
 
 .game-box div .checked {
 	background-color: white;
+}
+
+#twoplayer {
+	text-decoration: line-through;
 }
