@@ -6,7 +6,7 @@ body {
 	font-family: monospace;
 }
 h1 {
-	border: 2px solid grey;
+	border: 3px dotted grey;
 	border-radius: 50%;
 	background-color: cornsilk;
 	display: flex;
@@ -29,10 +29,11 @@ button {
 h2 button{
 	border: 0px solid black;
 	background-color: blanchedalmond;
+	text-decoration: underline;
 }
 h2 button:hover{
 	color: teal;
-	text-decoration: underline;	
+	text-decoration: overline underline dotted;
 }
 .users {
 	display: flex;
@@ -124,13 +125,19 @@ h2 button:hover{
 
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  background-color: cornsilk;
+  margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  border: 5px inset blanchedalmond;
+	border-radius: 15%;
+  width: 80%;
+	max-width: 1000px;
+	font-size: 16px;
 }
 
+.modal-content h3 {
+	text-align: center;
+}
 
 .close {
   color: #aaa;

@@ -103,12 +103,14 @@ const App = { // App Data and Functions
 	gameWin: (square) => { // checking if you have won the game
 		let matches = 0
 		const $gameMessage = $("#gameresult")
+
 		for (let i = 0; i < grids1.length; i++) {
 		 if (grids1[i].hasClass('flag') && grids1[i].hasClass('bomb')) {
 		 	matches++
 		 }
 
 		}
+
 		if (matches === App.difficulty) {
 		 if (App.difficulty === 40) {
 			 $gameMessage.text("YOU BEAT MY GAME ON EASY! BUT CAN YOU HANDLE HARD?")
@@ -119,14 +121,16 @@ const App = { // App Data and Functions
 		 if(App.difficulty === 132){
 			 $gameMessage.text('GG YOU SUPERIOR')
 		 }
+
 		}
+
 	},
 
-	gameOver: (tile, square) => { // checking if you lost the game by hitting a mine
+	gameOver: (tile, square) => { // called if you Left click on a mine
 		const $gameMessage = $("#gameresult")
 		App.isGameOver = true
 
-		square.forEach( (tile) => {
+		square.forEach( (tile) => {  // shows all bombs
 			if (tile.hasClass('bomb')) {
 				tile.text('📍').addClass('checked')
 			}
@@ -152,6 +156,7 @@ const App = { // App Data and Functions
 
 		setTimeout(() => {
 			if(gridX >= 0 && gridX <= 19 && gridY >= 0 && gridY <= 19){   // ANY SQUARE   -- THIS IS GOOD -- think i can implement this with the numbering of mines near the square
+
 				const $newLeft = $(`div[x=${gridX}][y=${left}]`)
 				const $newRight = $(`div[x=${gridX}][y=${right}]`)
 				const $newUp = $(`div[x=${above}][y=${gridY}]`)
@@ -162,6 +167,7 @@ const App = { // App Data and Functions
 				eventListeners.click($newDown)
 
 			}
+
 		}, 50)
 
 	},
@@ -171,14 +177,14 @@ const App = { // App Data and Functions
 		const emptyArray = Array(App.cols*App.rows - App.difficulty).fill('clear')
 		const gameArray = emptyArray.concat(bombArray)
 		const shuffledArray = gameArray.sort(() => Math.random() - 0.5) // randomizes position of bombs in the shuffled array
-
 		let j = 0
 		let exy = 0
+
 		for (let i = 0; i < App.cols*App.rows; i++) {
 
   		const tile = $('<div>').attr({			//sets up game grid
-  			x: exy,
-				y: j,
+  			x: exy, // setting up x value
+				y: j, //setting up y value
   			class: shuffledArray[i]
   		}).appendTo(playBox)
   		grid.push(tile)
@@ -281,9 +287,6 @@ const App = { // App Data and Functions
 }
 
 
-
-
-
 	let grids1 = []
 	//let grids2 = []
 	const $playOne = $('.player1Box')
@@ -292,7 +295,6 @@ const App = { // App Data and Functions
 	const $modalBtn = $("#modalBtn")
 	const $close = $(".close")
 	$playTwo.remove()
-
 
 
  //######## BUTTONS ON PAGE ################
@@ -306,7 +308,6 @@ const App = { // App Data and Functions
 
 	$modal.on('click', () => {
 			$modal.css("display", "none")
-
 	})
 
 	$("#oneplayer").on('click', () => {
@@ -336,9 +337,5 @@ const App = { // App Data and Functions
 		eventListeners.reset()
 	})
  ////######## BUTTONS ON PAGE ################
-
-
-
-
 
 })

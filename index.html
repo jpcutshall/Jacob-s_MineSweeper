@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title>Jacob's Minesweeper</title>
+		<title>Jacob's Mine Avoidance</title>
 		<script src="https://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
 		<script type="text/javascript" src="js/app.js" charset="utf-8"></script>
 		<link rel="stylesheet" href="css/style.css">
@@ -14,17 +14,17 @@
 			<div class="modal-content">
 				<span class="close">&times;</span>
 				<h3>How To Play Jacob's Minesweeper</h3>
-				<p>Two player does not currently work :( - it is my goal</p>
+				<p>-<u>Two player does not work</u> :( - it is a future goal</p>
 				<ol>
 					<li>Choose Difficulty to begin - if not familiar with minesweeper I suggest the default - Easy</li>
-					<li>Click on 1 player start to start the game</li>
+					<li>Click on Start to start the game</li>
 					<li>Click any random box to reveal if it is a mine or is a box near a mine</li>
 					<li>The number inside the box tells you how many mines are within a one block space of that box - above/below, left/right, and diagonally</li>
 					<li>When a box is not near a mine it will reveal other nearby boxes not near mines</li>
 					<li>If you think a hidden box has a mine - Right Click or ctrl-left Click to flag it</li>
 					<li>To win the game you must flag all of the mines without revealing them</li>
 					<li>left clicking on a mine is an Automatic loss</li>
-					<li>Press Reset to start over - must click Player Start to begin new game</li>
+					<li>Press Reset to start over - must click Start to generate a new game</li>
 				</ol>
 			</div>
 		</div>
@@ -36,7 +36,7 @@
 		</div>
 		<h2 id="settings">Settings:-Easy Difficulty</h2>
 		<div class="users">
-			<button type="button" id="oneplayer">1 Player Start</button>
+			<button type="button" id="oneplayer">Start</button>
 			<button type="button" id="twoplayer">2 Player Start</button>
 		</div>
 		<div class="reset">
