@@ -5,20 +5,20 @@ First project for General Assembly
 [Play My Game](https://jpcutshall.github.io/Jacob-s_MineSweeper/)
 
 ## About
-    I chose to recreate mineSweeper because I wanted to be challenged and learn something new. It was a lot more challenging than I thought, but I am glad to have gotten it working correctly! My original intent was to make it Two player with two different games going on at once. The players would take turns playing their box (would be very slow game with the current setup). Got single player working almost like the original.
+  I chose to recreate mineSweeper because I wanted to be challenged and learn something new. It was a lot more challenging than I thought, but I am glad to have gotten it working correctly! My original intent was to make it Two player with two different games going on at once. The players would take turns playing their box (would be very slow game with the current setup). Got single player working almost like the original.
 
 ### setup
-    - two Objects App and eventListeners
-      - App contains game functions and data associated with the games
-      - eventListeners just holds callback functions for my events
-      - Really think The game needs to be setup with a class but I cant think of how to do it
-    - when start button is pressed 'App.createGrid()'
-      - creates a shuffled Array of '$(<div>)' with class of mines shuffled in and event Listener for both clicks
-      - appends them to the game box divs
-      - applies number values to squares with x amount of mines nearby
-    - clicking on a square adds class checked and checks if it is a mine for game over condition
-      - if its not a mine or square near mine its starts checking nearby for blank squares and checks(shows) them
-      - every time flag is placed win condition is checked because having the flags on the same unchecked squares as a mine equals a win
+  - two Objects App and eventListeners
+    - App contains game functions and data associated with the games
+    - eventListeners just holds callback functions for my events
+    - Really think The game needs to be setup with a class but I cant think of how to do it
+  - when start button is pressed 'App.createGrid()'
+    - creates a shuffled Array of '$(<div>)' with class of mines shuffled in and event Listener for both clicks
+    - appends them to the game box divs
+    - applies number values to squares with x amount of mines nearby
+  - clicking on a square adds class checked and checks if it is a mine for game over condition
+    - if its not a mine or square near mine its starts checking nearby for blank squares and checks(shows) them
+    - every time flag is placed win condition is checked because having the flags on the same unchecked squares as a mine equals a win
 
 ### Biggest Issues
 1 . Checking nearby squares if mine and adding how many are around - took me a couple days and is not very readable
