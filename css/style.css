@@ -85,7 +85,7 @@ button {
 	font-family: monospace;
 }
 .game-box div .bomb {
-	background-color: tomato;
+	background-color: lightgrey;
 }
 
 .game-box div .checked {

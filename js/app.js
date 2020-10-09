@@ -14,7 +14,7 @@ const eventListeners = {
 
 	},
 	easy: () => {
-		App.difficulty = 33;
+		App.difficulty = 40;
 	},
 	hard: () => {
 		App.difficulty = 66;
@@ -22,13 +22,13 @@ const eventListeners = {
 	extreme: () => {
 		App.difficulty = 132;
 	},
-	click: (tile) => {
+	click: (tile, grid) => {
 		let x = tile.attr("x")
 		let y = tile.attr("y")
-		if (App.gameOver) return
+		if (App.isGameOver) return
 		if (tile.hasClass('checked') || tile.hasClass('flag')) return
 		if (tile.hasClass('bomb')) {  // end game for player
-			alert(`you hit a mine!`)
+			App.gameOver(tile, grid)
 		} else {
 			let total = tile.attr('nearby')
 			if (total != 0) {
@@ -54,8 +54,20 @@ let grids2 = []
 const App = {
 	cols: 20,  // using cols and rows because i wanted to make it easy to edit but lets see how it plays out.
 	rows: 20,
-	difficulty: 33,// number of mines. want to implement this another way like percentage of the number of divs
-	gameOver: false,
+	difficulty: 40,// number of mines. want to implement this another way like percentage of the number of divs
+	isGameOver: false,
+	gameOver: (tile, grid) => {
+		console.log('Game is over')
+		App.isGameOver = true
+
+		grid.forEach( tile => {
+			if (tile.hasClass('bomb')) {
+				tile.html('📍')
+			}
+		})
+
+
+	},
 	checkTile: (square, x, y) => { // checking tiles nearby after click
 		const gridX = parseInt(square.attr("x"))
 		const gridY = parseInt(square.attr("y"))
@@ -71,21 +83,18 @@ const App = {
 		const right = gridY + 1
 
 		setTimeout(() => {
-			if(gridX > 0 && gridX < 19 && gridY > 0 && gridY < 19){   // ANY SQUARE NOT ON THE EDGE  -- THIS IS GOOD -- think i can implement this with the numbering of mines near the square
+			if(gridX >= 0 && gridX <= 19 && gridY >= 0 && gridY <= 19){   // ANY SQUARE   -- THIS IS GOOD -- think i can implement this with the numbering of mines near the square
 				const $newLeft = $(`div[x=${gridX}][y=${left}]`)
 				const $newRight = $(`div[x=${gridX}][y=${right}]`)
 				const $newUp = $(`div[x=${above}][y=${gridY}]`)
 				const $newDown = $(`div[x=${below}][y=${gridY}]`)
-				const $newDiagDown = $(`div[x=${below}][y=${right}]`)
-				const $newDiagUp = $(`div[x=${above}][y=${left}]`)
 				eventListeners.click($newLeft)
 				eventListeners.click($newRight)
 				eventListeners.click($newUp)
 				eventListeners.click($newDown)
-				eventListeners.click($newDiagDown)
-				eventListeners.click($newDiagDown)
+
 			}
-		}, 33)
+		}, 50)
 
 	},
 	createNewGrid: (playBox, grid) => {
@@ -98,8 +107,6 @@ const App = {
 		let exy = 0
 		for (let i = 0; i < App.cols*App.rows; i++) {
 
-			//const $playOne = $('.player1Box')
-  		//const $playTwo = $('.player2Box')	// EDIT
   		const tile = $('<div>').attr({			//sets up game for player one
   			x: exy,
 				y: j,
@@ -112,8 +119,8 @@ const App = {
 				exy++
 			}
 
-			tile.on("click", (it) => {
-				eventListeners.click(tile)
+			tile.on("click", () => {
+				eventListeners.click(tile, grid)
 			})
 		}
 
