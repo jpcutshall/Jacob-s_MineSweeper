@@ -8,7 +8,7 @@ First project for General Assembly
   I chose to recreate mineSweeper because I wanted to be challenged and learn something new. It was a lot more challenging than I thought, but I am glad to have gotten it working correctly! My original intent was to make it Two player with two different games going on at once. The players would take turns playing their box (would be very slow game with the current setup). Got single player working almost like the original.
 
 ### setup
-  - two Objects App and eventListeners
+  - two Objects - App and eventListeners
     - App contains game functions and data associated with the games
     - eventListeners just holds callback functions for my events
     - Really think The game needs to be setup with a class but I cant think of how to do it
