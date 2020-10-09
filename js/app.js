@@ -145,10 +145,6 @@ const App = { // App Data and Functions
 		const gridY = parseInt(square.attr("y"))
 		const gridXx = square.attr("x")
 		const gridYy = square.attr("y")
-		const $topEdge = $(`div[x="0"][y=${gridYy}]`) // code breaks if i change to just gridY why is gridYy needed
-		const $bottomEdge = $(`div[x="19"][y=${gridYy}]`)
-		const $rightEdge = $(`div[x=${gridXx}][y="19"]`)
-		const $leftEdge = $(`div[x=${gridXx}][y="0"]`)
 		const below = gridX + 1
 		const above = gridX - 1
 		const left = gridY - 1
@@ -161,10 +157,19 @@ const App = { // App Data and Functions
 				const $newRight = $(`div[x=${gridX}][y=${right}]`)
 				const $newUp = $(`div[x=${above}][y=${gridY}]`)
 				const $newDown = $(`div[x=${below}][y=${gridY}]`)
+				const $newUpLeft = $(`div[x=${above}][y=${left}]`)
+				const $newDownRight = $(`div[x=${below}][y=${right}]`)
+				const $newUpRight = $(`div[x=${above}][y=${right}]`)
+				const $newDownLeft = $(`div[x=${below}][y=${left}]`)
+
 				eventListeners.click($newLeft)
 				eventListeners.click($newRight)
 				eventListeners.click($newUp)
 				eventListeners.click($newDown)
+				eventListeners.click($newUpLeft)
+				eventListeners.click($newDownRight)
+				eventListeners.click($newUpRight)
+				eventListeners.click($newDownLeft)
 
 			}
 
